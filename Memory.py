@@ -91,6 +91,7 @@ def draw():
 
 
 def endGame():
+    """End the game and display the number of taps."""
     global numTaps
     finalTaps = "Number of Taps: " + str(numTaps)
     clear()
