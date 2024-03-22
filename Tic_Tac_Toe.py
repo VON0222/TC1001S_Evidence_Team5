@@ -17,6 +17,10 @@ from turtle import color, width
 from freegames import line
 
 
+""" Definimos un conjunto para almacenar las casillas ocupadas """
+occupied_cells = set()
+
+
 def grid():
     """ Se define una función llamada grid que dibuja el tablero
     tic-tac-toe dibujando cuatro líneas """
@@ -35,6 +39,7 @@ def drawx(x, y):
     width(15)
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
+    occupied_cells.add((x, y))
 
 
 def drawo(x, y):
@@ -48,6 +53,7 @@ def drawo(x, y):
     goto(x + 67, y + 5)
     down()
     circle(62)
+    occupied_cells.add((x, y))
 
 
 def floor(value):
@@ -68,6 +74,9 @@ def tap(x, y):
     que se hizo clic, dependiendo de cuyo turno sea."""
     x = floor(x)
     y = floor(y)
+    if (x, y) in occupied_cells:
+        print("¡Casilla ocupada! Intenta en otra casilla.")
+        return
     player = state['player']
     draw = players[player]
     draw(x, y)
