@@ -30,29 +30,37 @@ def grid():
     line(-200, 67, 200, 67)
 
 
-def drawx(x, y):
+def drawx(x, y, size=50):
     """ Se define una función llamada drawx que dibuja un jugador X
     en las coordenadas especificadas (x, y)
     tilizamos color para modificar el color
-    widtch para el tamaño"""
-    color('blue')
-    width(15)
-    line(x, y, x + 133, y + 133)
-    line(x, y + 133, x + 133, y)
-    occupied_cells.add((x, y))
-
-
-def drawo(x, y):
-    """ Se define una función llamada drawo que dibuja un jugador O
-    en las coordenadas especificadas (x, y)
-    utilizamos color para modificar el color
-    widtch para el tamaño"""
+    widtch para establecer el ancho
+    Se centra la figura"""
     color('red')
     width(15)
     up()
-    goto(x + 67, y + 5)
+    goto(x - size / 2, y - size / 2)
     down()
-    circle(62)
+    goto(x + size / 2, y + size / 2)
+    up()
+    goto(x + size / 2, y - size / 2)
+    down()
+    goto(x - size / 2, y + size / 2)
+    occupied_cells.add((x, y))
+
+
+def drawo(x, y, size=50):
+    """ Se define una función llamada drawo que dibuja un jugador O
+    en las coordenadas especificadas (x, y)
+    utilizamos color para modificar el color
+    widtch para establecer el ancho
+    Se centra la figura """
+    color('blue')
+    width(15)
+    up()
+    goto(x, y - size / 2)
+    down()
+    circle(size / 2)
     occupied_cells.add((x, y))
 
 
@@ -70,18 +78,24 @@ players = [drawx, drawo]
 
 def tap(x, y):
     """Se define una función llamada tap que se manda llamar
-    cuando se hace clic en la pantalla. Dibuja una X o una O en el cuadro
-    que se hizo clic, dependiendo de cuyo turno sea."""
-    x = floor(x)
-    y = floor(y)
+    cuando se hace clic en la pantalla.que se hizo clic, dependiendo
+    de cuyo turno sea.
+    Establece el tamaño del jugador X o O
+    Verifica si la casilla está ocupada
+    Dibuja una X o una O en el cuadro"""
+    size = 50
+    x = round(x / 133) * 133
+    y = round(y / 133) * 133
     if (x, y) in occupied_cells:
         print("¡Casilla ocupada! Intenta en otra casilla.")
         return
-    player = state['player']
-    draw = players[player]
-    draw(x, y)
+    draw = drawx if state['player'] == 0 else drawo
+    draw(x, y, size)
     update()
-    state['player'] = not player
+    state['player'] = 1 - state['player']
+
+
+state = {'player': 0}
 
 
 """ Establece las dimensiones de la ventana de dibujo. """
