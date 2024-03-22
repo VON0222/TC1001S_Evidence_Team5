@@ -115,7 +115,8 @@ def world():
             if tile == 1:
                 path.up()
                 path.goto(x + 10, y + 10)
-                path.dot(2, 'white')
+                # Se  cambio el tamaño de los puntos blancos de 2 a 4
+                path.dot(4, 'white')
 
 
 def move():
@@ -139,7 +140,8 @@ def move():
 
     up()
     goto(pacman.x + 10, pacman.y + 10)
-    dot(20, 'yellow')
+    # Se realizo el cambio en el tamaño del pacman de 20 a 18
+    dot(18, 'yellow')
 
     for point, course in ghosts:
         if valid(point + course):
@@ -157,7 +159,8 @@ def move():
 
         up()
         goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
+        # Se realizo el cambio en el tamaño de los fantasmas de 20 a 18
+        dot(18, 'red')
 
     update()
 
