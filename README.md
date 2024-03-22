@@ -5,7 +5,15 @@ Repositorio para la evidencia del equipo 5. En este repositorio se encuentran lo
 
 ### Pacman
 
-[Insertar quien trabajo en esto y que hizo]
+Juego modificado por Kevin Josué Martínez Leyva.
+
+El código base es el juego Pacman, en una versión simplificada usando la librería turtle y freegames.
+El juego consiste en escapar de los fantasmas y recolectar todos los puntos blancos del tablero.
+
+Del código original se moficio el tamaño de los fantasmas y pacman, haciendolos un poco más pequeños,
+los puntos blancos se hicieron un poco màs grandes, ademàs la velocidad de pacman y los fantamas
+incremento en un 90%, por último el tablero (mapa) fue modificado, para que la parte izquierda
+y derecha solo sea conectada por dos casillas.
 
 ### Tic Tac Toe
 
