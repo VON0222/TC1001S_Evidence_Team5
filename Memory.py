@@ -10,9 +10,11 @@ from turtle import hideturtle, tracer, onscreenclick, done
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = list(range(32)) * 2   # a
 state = {'mark': None}
 hide = [True] * 64
+found = 0
+finish = False
 
 
 def square(x, y):
@@ -46,9 +48,14 @@ def tap(x, y):
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
+        global found
+        found += 1
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        if found == 32:   # a
+            global finish
+            finish = True
 
 
 def draw():
@@ -58,7 +65,7 @@ def draw():
     shape(car)
     stamp()
 
-    for count in range(64):
+    for count in range(64):   # a
         if hide[count]:
             x, y = xy(count)
             square(x, y)
@@ -72,8 +79,22 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    global finish
+
+    if finish is False:
+        update()
+        ontimer(draw, 100)
+    else:
+        endGame()
+
+
+def endGame():
+    clear()
+    goto(-110, 0)
+    color('black')
+    write("Game Over", font=('Arial', 30, 'normal'))
     update()
-    ontimer(draw, 100)
+    ontimer(endGame, 100)
 
 
 shuffle(tiles)
