@@ -20,6 +20,8 @@ path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-40, -80)
+
+# Delcaración de la posición inicial de los fantasmas
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
@@ -32,7 +34,7 @@ La siguiente lista contiene el tablero, en donde los 0 representan espacios
 vacíos y los 1 representan los pixeles donde pacman y los fantasmas pueden
 moverse.
 
-En mi caso cambie el tablero (losas) para que solo existan dos recuadros
+Se modifico el tablero (losas) para que solo existan dos recuadros
 que conecten la parte izquierda y derecha del mismo.
 """
 tiles = [
@@ -83,7 +85,7 @@ def offset(point):
 
 
 def valid(point):
-    """Devuelve Verdadero si el punto es válido en mosaicos."""
+    """Devuelve Verdadero si el punto es válido en los mosaicos."""
     index = offset(point)
 
     if tiles[index] == 0:
@@ -98,7 +100,7 @@ def valid(point):
 
 
 def world():
-    """Dibuja el mundo usando el camino."""
+    """Dibuja el tablero(mapa) usando el camino."""
     bgcolor('black')
     path.color('blue')
 
@@ -162,12 +164,15 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-
-    ontimer(move, 100)
+    """Esta función es la que controla la velocidad,
+    con el segundo argumento que se le da.
+    Se cambia la función de 100 a 10 (milisegundos)
+    logrando un cambio de 90% màs de velocidad."""
+    ontimer(move, 10)
 
 
 def change(x, y):
-    """Cambia el objetivo pacman si es válido"""
+    """Cambia el objetivo (dirreción) del pacman si es válido"""
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
