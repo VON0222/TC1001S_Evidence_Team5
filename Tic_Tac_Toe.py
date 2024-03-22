@@ -13,6 +13,7 @@ Exercises
     De freegames se importa linera dibujar líneas en la pantalla. """
 from turtle import up, goto, down, circle, update
 from turtle import setup, hideturtle, tracer, onscreenclick, done
+from turtle import color, width
 from freegames import line
 
 
@@ -27,14 +28,22 @@ def grid():
 
 def drawx(x, y):
     """ Se define una función llamada drawx que dibuja un jugador X
-    en las coordenadas especificadas (x, y) """
+    en las coordenadas especificadas (x, y)
+    tilizamos color para modificar el color
+    widtch para el tamaño"""
+    color('blue')
+    width(15)
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
 
 def drawo(x, y):
     """ Se define una función llamada drawo que dibuja un jugador O
-    en las coordenadas especificadas (x, y)"""
+    en las coordenadas especificadas (x, y)
+    utilizamos color para modificar el color
+    widtch para el tamaño"""
+    color('red')
+    width(15)
     up()
     goto(x + 67, y + 5)
     down()
