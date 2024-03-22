@@ -1,5 +1,4 @@
-"""Memory, puzzle game of number pairs.
-"""
+"""Memory, puzzle game of number pairs."""
 
 from random import shuffle
 from turtle import up, goto, down, color, begin_fill, forward
@@ -10,9 +9,10 @@ from turtle import hideturtle, tracer, onscreenclick, done
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2   # a
+tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
+numTaps = 0
 found = 0
 finish = False
 
@@ -41,7 +41,9 @@ def xy(count):
 
 
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    """Update mark, tap counter and hidden tiles based on tap."""
+    global numTaps
+    numTaps += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -53,7 +55,7 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-        if found == 32:   # a
+        if found == 32:
             global finish
             finish = True
 
@@ -65,7 +67,7 @@ def draw():
     shape(car)
     stamp()
 
-    for count in range(64):   # a
+    for count in range(64):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
@@ -89,10 +91,14 @@ def draw():
 
 
 def endGame():
+    global numTaps
+    finalTaps = "Number of Taps: " + str(numTaps)
     clear()
     goto(-110, 0)
     color('black')
     write("Game Over", font=('Arial', 30, 'normal'))
+    goto(-130, -50)
+    write(finalTaps, font=('Arial', 20, 'normal'))
     update()
     ontimer(endGame, 100)
 
