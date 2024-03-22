@@ -6,16 +6,19 @@ Exercises
 2. What happens when someone taps a taken spot?
 3. How would you detect when someone has won?
 4. How could you create a computer player?
-"""
 
+
+    importan funciones y objetos específicos de turtle.
+    los cuales se utilizan para dibujar gráficos en la pantalla.
+    De freegames se importa linera dibujar líneas en la pantalla. """
 from turtle import up, goto, down, circle, update
 from turtle import setup, hideturtle, tracer, onscreenclick, done
-
 from freegames import line
 
 
 def grid():
-    """Draw tic-tac-toe grid."""
+    """ Se define una función llamada grid que dibuja el tablero
+    tic-tac-toe dibujando cuatro líneas """
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
@@ -23,13 +26,15 @@ def grid():
 
 
 def drawx(x, y):
-    """Draw X player."""
+    """ Se define una función llamada drawx que dibuja un jugador X
+    en las coordenadas especificadas (x, y) """
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
 
 def drawo(x, y):
-    """Draw O player."""
+    """ Se define una función llamada drawo que dibuja un jugador O
+    en las coordenadas especificadas (x, y)"""
     up()
     goto(x + 67, y + 5)
     down()
@@ -37,8 +42,11 @@ def drawo(x, y):
 
 
 def floor(value):
-    """Round value down to grid with square size 133."""
+    """ Esta define una función llamada floor que redondea hacia abajo
+    un valor dado al múltiplo de 133 más cercano."""
     return ((value + 200) // 133) * 133 - 200
+    """ Se inicializa un diccionario state con una clave 'player' establecida
+    en 0, y una lista players que contiene las funciones drawx y drawo."""
 
 
 state = {'player': 0}
@@ -46,7 +54,9 @@ players = [drawx, drawo]
 
 
 def tap(x, y):
-    """Draw X or O in tapped square."""
+    """Se define una función llamada tap que se manda llamar
+    cuando se hace clic en la pantalla. Dibuja una X o una O en el cuadro
+    que se hizo clic, dependiendo de cuyo turno sea."""
     x = floor(x)
     y = floor(y)
     player = state['player']
@@ -56,10 +66,18 @@ def tap(x, y):
     state['player'] = not player
 
 
+""" Establece las dimensiones de la ventana de dibujo. """
 setup(420, 420, 370, 0)
+"""se usa para dibujar las X y O, sin que el cursor sea visible."""
 hideturtle()
+"""Controla si las actualizaciones del lienzo se muestran en tiempo
+   real o no."""
 tracer(False)
+"""Esta función se llama para dibujar el tablero."""
 grid()
 update()
+""" Cuando el jugador hace clic en la ventana, se llama a la función tap(x, y)
+    que se encarga de manejar el clic y realizar las acciones necesarias """
 onscreenclick(tap)
+""" mantiene la ventana de dibujo abierta hasta que se cierre manualmente."""
 done()
